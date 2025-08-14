@@ -153,6 +153,7 @@ func (c *calendar) ScheduleMeeting(ctx context.Context, attendees []string, star
 	// Build the API URL
 	baseURL := "https://www.googleapis.com/calendar/v3/calendars/primary/events"
 	params := url.Values{}
+	fmt.Println("===================================",c.config.GoogleCalendarAPIKey)
 	params.Add("key", c.config.GoogleCalendarAPIKey)
 	params.Add("sendUpdates", "all") // Send invitations to attendees
 

@@ -2,8 +2,8 @@ package agent
 
 import (
 	"ai_agent/internal/constants/model/dto"
-	"ai_agent/internal/service"
 	"ai_agent/internal/handler"
+	"ai_agent/internal/service"
 	"ai_agent/platform/logger"
 	"encoding/json"
 	"net/http"
@@ -53,11 +53,6 @@ type EventsResponse struct {
 
 // ProcessCommand handles natural language commands
 func (h *agentHandler) ProcessCommand(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	var req CommandRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		h.logger.Error(r.Context(), "Failed to decode command request", zap.Error(err))
@@ -81,11 +76,6 @@ func (h *agentHandler) ProcessCommand(w http.ResponseWriter, r *http.Request) {
 
 // ScheduleMeeting handles meeting scheduling requests
 func (h *agentHandler) ScheduleMeeting(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	var req MeetingRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		h.logger.Error(r.Context(), "Failed to decode meeting request", zap.Error(err))
@@ -117,11 +107,6 @@ func (h *agentHandler) ScheduleMeeting(w http.ResponseWriter, r *http.Request) {
 
 // SendEmail handles email sending requests
 func (h *agentHandler) SendEmail(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	var req EmailRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		h.logger.Error(r.Context(), "Failed to decode email request", zap.Error(err))
@@ -145,11 +130,6 @@ func (h *agentHandler) SendEmail(w http.ResponseWriter, r *http.Request) {
 
 // GetEvents retrieves upcoming events
 func (h *agentHandler) GetEvents(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	events, err := h.service.GetUpcomingEvents(r.Context())
 
 	response := EventsResponse{
@@ -166,11 +146,6 @@ func (h *agentHandler) GetEvents(w http.ResponseWriter, r *http.Request) {
 
 // SendDailyReminder triggers a daily reminder
 func (h *agentHandler) SendDailyReminder(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	err := h.service.SendDailyReminder(r.Context())
 
 	response := CommandResponse{}

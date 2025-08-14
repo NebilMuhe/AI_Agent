@@ -4,7 +4,8 @@ type Config struct {
 	GoogleCalendarAPIKey string
 	SendGridAPIKey       string
 	GeminiAPIKey         string
-	ServerPort string
+	ServerPort           string
+	GmailAppPassword     string
 
 	GoogleCalendarURL string
 	SendGridURL       string
@@ -12,9 +13,8 @@ type Config struct {
 
 	FromEmail string
 	FromName  string
-	UserEmail string 
+	UserEmail string
 
-	
 	CalendarID string
 	TimeZone   string
 

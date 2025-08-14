@@ -70,7 +70,8 @@ func (g *gemini) ProcessCommand(ctx context.Context, command string) (string, er
 	}
 
 	// Build the API URL
-	apiURL := fmt.Sprintf("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=%s", g.config.GeminiAPIKey)
+	fmt.Println("apikey=============================================", g.config.GeminiAPIKey)
+	apiURL := fmt.Sprintf("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=%s", g.config.GeminiAPIKey)
 
 	// Create the request
 	req, err := http.NewRequest("POST", apiURL, bytes.NewBuffer(jsonData))
